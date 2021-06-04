@@ -51,6 +51,14 @@ public static class Algorithms
         }
     }
 
+    public static void mergeSort(int[] arr)
+    {
+        if (arr.Length == 1)
+        {
+            return;
+        }
+
+    }
 
 
 

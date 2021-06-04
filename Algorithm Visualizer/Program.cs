@@ -16,7 +16,7 @@ namespace Algorithm_Visualizer
                 Console.Write(i + " ");
             Console.WriteLine();
 
-            bubbleSort(test);
+            insertionSort(test);
 
             foreach (int i in test)
                 Console.Write(i + " ");

@@ -53,11 +53,44 @@ public static class Algorithms
 
     public static void mergeSort(int[] arr)
     {
-        if (arr.Length == 1)
+        if (arr.Length <= 1)
         {
             return;
         }
 
+        int[] leftHalf = new int[arr.Length / 2];
+        int[] rightHalf = new int[arr.Length - leftHalf.Length];
+        for (int l = 0; l < leftHalf.Length; l++)
+        {
+            leftHalf[l] = arr[l];
+        }
+        for (int r = 0; r < rightHalf.Length; r++)
+        {
+            rightHalf[r] = arr[leftHalf.Length + r];
+        }
+
+        mergeSort(leftHalf);
+        mergeSort(rightHalf);
+        int f = 0, s = 0, n = 0;
+        while (f < leftHalf.Length && s < rightHalf.Length)
+        {
+            if (leftHalf[f] < rightHalf[s])
+            {
+                arr[n++] = leftHalf[f++];
+            }
+            else
+            {
+                arr[n++] = rightHalf[s++];
+            }
+        }
+        while (f < leftHalf.Length)
+        {
+            arr[n++] = leftHalf[f++];
+        }
+        while (s < rightHalf.Length)
+        {
+            arr[n++] = rightHalf[s++];
+        }
     }
 
 

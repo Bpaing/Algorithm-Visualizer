@@ -93,6 +93,43 @@ public static class Algorithms
         }
     }
 
+    public static void quickSort(int[] arr, int low, int high)
+    {
+        if (arr.Length == 1)
+        {
+            return;
+        }
+        int piv = partition(arr, low, high);
+        quickSort(arr, 0, piv);
+        quickSort(arr, piv, high);
+    }
 
+    private static int partition(int[] arr, int low, int high)
+    {
+        Random rand = new Random();
+        int pivot = rand.Next(low, high);
+        int leftMarker = low, rightMarker = high;
+        while (leftMarker < pivot && rightMarker > pivot)
+        {
+            while (arr[leftMarker] < arr[pivot])
+                leftMarker++;
+            while (arr[rightMarker] >= arr[pivot])
+                rightMarker--;
+            if (arr[leftMarker] >= arr[pivot] && arr[rightMarker] <= arr[pivot])
+            {
+                int temp = arr[leftMarker];
+                arr[leftMarker] = arr[rightMarker];
+                arr[rightMarker] = temp;
+            }
+        }
+        if (arr[pivot] < arr[leftMarker])
+        {
+            int temp = arr[leftMarker];
+            arr[leftMarker] = arr[pivot];
+            arr[pivot] = temp;
+        }
+        pivot = leftMarker;
+        return pivot;
+    }
 
 }

@@ -95,25 +95,27 @@ public static class Algorithms
 
     public static void quickSort(int[] arr, int low, int high)
     {
-        if (arr.Length == 1)
-        {
+        if (high - low <= 1)
             return;
-        }
         int piv = partition(arr, low, high);
-        quickSort(arr, 0, piv);
-        quickSort(arr, piv, high);
+        quickSort(arr, low, piv);
+        quickSort(arr, piv + 1, high);
     }
 
     private static int partition(int[] arr, int low, int high)
     {
         Random rand = new Random();
         int pivot = rand.Next(low, high);
-        int leftMarker = low, rightMarker = high;
-        while (leftMarker < pivot && rightMarker > pivot)
+        if (high - low <= 1)
         {
-            while (arr[leftMarker] < arr[pivot])
+            return pivot;
+        }
+        int leftMarker = low, rightMarker = high - 1;
+        while (leftMarker < rightMarker)
+        {
+            while (arr[leftMarker] < arr[pivot] && leftMarker < rightMarker)
                 leftMarker++;
-            while (arr[rightMarker] >= arr[pivot])
+            while (arr[rightMarker] >= arr[pivot] && rightMarker > leftMarker)
                 rightMarker--;
             if (arr[leftMarker] >= arr[pivot] && arr[rightMarker] <= arr[pivot])
             {

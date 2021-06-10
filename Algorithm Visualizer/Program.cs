@@ -9,14 +9,15 @@ namespace Algorithm_Visualizer
         {
             var rand = new Random();
             Console.WriteLine("Hello World!");
-            int[] test = new int[20];
+            int size = 20;
+            int[] test = new int[size];
             for (int i = 0; i < test.Length; i++)
-                test[i] = rand.Next(-20, 20);
+                test[i] = rand.Next(-size, size);
             foreach (int i in test)
                 Console.Write(i + " ");
             Console.WriteLine();
 
-            insertionSort(test);
+            quickSort(test, 0, test.Length);
 
             foreach (int i in test)
                 Console.Write(i + " ");

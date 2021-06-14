@@ -93,45 +93,43 @@ public static class Algorithms
         }
     }
 
-    public static void quickSort(int[] arr, int low, int high)
+    public static void quickSort(int[] arr)
     {
-        if (high - low <= 1)
-            return;
-        int piv = partition(arr, low, high);
-        quickSort(arr, low, piv);
-        quickSort(arr, piv + 1, high);
+        quickSort(arr, 0, arr.Length - 1);
     }
 
+    private static void quickSort(int[] arr, int low, int high)
+    {
+        if (low >= high)
+            return;
+        int pivotIndex = partition(arr, low, high);
+        quickSort(arr, low, pivotIndex);
+        quickSort(arr, pivotIndex + 1, high);
+    }
     private static int partition(int[] arr, int low, int high)
     {
-        Random rand = new Random();
-        int pivot = rand.Next(low, high);
-        if (high - low <= 1)
+        int pivotIndex = low;
+        int pivotValue = arr[low];
+
+        while (low < high)
         {
-            return pivot;
-        }
-        int leftMarker = low, rightMarker = high - 1;
-        while (leftMarker < rightMarker)
-        {
-            while (arr[leftMarker] < arr[pivot] && leftMarker < rightMarker)
-                leftMarker++;
-            while (arr[rightMarker] >= arr[pivot] && rightMarker > leftMarker)
-                rightMarker--;
-            if (arr[leftMarker] >= arr[pivot] && arr[rightMarker] <= arr[pivot])
+            while (high > pivotIndex && arr[high] >= pivotValue)
+                high--;
+            if (high > pivotIndex)
             {
-                int temp = arr[leftMarker];
-                arr[leftMarker] = arr[rightMarker];
-                arr[rightMarker] = temp;
+                arr[pivotIndex] = arr[high];
+                arr[high] = pivotValue;
+                pivotIndex = high;
+            }
+            while (low < pivotIndex && arr[low] <= pivotValue)
+                low++;
+            if (low < pivotIndex)
+            {
+                arr[pivotIndex] = arr[low];
+                arr[low] = pivotValue;
+                pivotIndex = low;
             }
         }
-        if (arr[pivot] < arr[leftMarker])
-        {
-            int temp = arr[leftMarker];
-            arr[leftMarker] = arr[pivot];
-            arr[pivot] = temp;
-        }
-        pivot = leftMarker;
-        return pivot;
+        return pivotIndex;
     }
-
 }

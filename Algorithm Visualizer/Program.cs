@@ -17,7 +17,7 @@ namespace Algorithm_Visualizer
                 Console.Write(i + " ");
             Console.WriteLine();
 
-            quickSort(test);
+            countingSort(test);
 
             foreach (int i in test)
                 Console.Write(i + " ");

@@ -132,4 +132,66 @@ public static class Algorithms
         }
         return pivotIndex;
     }
+    public static void heapSort(int[] arr)
+    {
+        for (int i = arr.Length / 2 - 1; i >= 0; i--)
+        {
+            maxHeap(arr, i, arr.Length);
+        }
+        for (int end = arr.Length - 1; end > 0; end--)
+        {
+            int temp = arr[end];
+            arr[end] = arr[0];
+            arr[0] = temp;
+            maxHeap(arr, 0, end);
+        }
+    }
+
+    public static void maxHeap(int[] arr, int node, int n)
+    {
+        int max = node;
+        int left = (2 * node) + 1;
+        int right = (2 * node) + 2;
+
+        if (left < n && arr[left] > arr[max])
+            max = left;
+        if (right < n && arr[right] > arr[max])
+            max = right;
+
+        if (max != node)
+        {
+            int temp = arr[max];
+            arr[max] = arr[node];
+            arr[node] = temp;
+            maxHeap(arr, max, n);
+        }
+    }
+    public static void countingSort(int[] arr)
+    {
+        int max = int.MinValue;
+        for (int i = 0; i < arr.Length; i++)
+        {
+            if (arr[i] < 0)
+                return;
+            else if (arr[i] > max)
+                max = arr[i];
+        }
+        int[] numIndex = new int[max + 1];
+        for (int i = 0; i < arr.Length; i++)
+        {
+            numIndex[arr[i]]++;
+        }
+        int[] result = new int[arr.Length];
+        for (int i = 0; i < numIndex.Length; i++)
+        {
+            if (numIndex[arr[i]] > 0)
+            {
+                result[numIndex[arr[i]]] = arr[i];
+                numIndex[arr[i]]--;
+            }
+        }
+        Array.Copy(result, arr, arr.Length);
+    }
+
+
 }
